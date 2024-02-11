@@ -12,15 +12,15 @@ addEventListener('keydown', evt => {
     
     case 'ArrowLeft':
       // previous scenario
-      scenario--;
-      scenario = Math.max(scenario, 0);
+      scenarioNum--;
+      scenarioNum = Math.max(scenarioNum, 0);
       resetScenario();
       break;
     
     case 'ArrowRight':
       // next scenario
-      scenario++;
-      scenario = Math.min(scenario, SCENARIOS.length - 1);
+      scenarioNum++;
+      scenarioNum = Math.min(scenarioNum, SCENARIOS.length - 1);
       resetScenario();
       break;
   }

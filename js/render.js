@@ -1,10 +1,19 @@
 function render() {
   ctx.clearRect(-aspect, -1, aspect * 2, 2);
   
-  ctx.fillStyle = 'red';
-  ctx.beginPath();
-  ctx.arc(0, 0, 0.1, 0, Math.PI * 2);
-  ctx.fill();
+  for (let [ mass, color, density, x, y, z, _vx, _vy, _vz ] of particles) {
+    let [ visible, screenX, screenY, objDist ] = transform3DTo2D(x, y, z, dist, elev, azim);
+    
+    if (visible) {
+      let size = (mass / density) ** (1 / 3);
+      let visualSize = size / objDist;
+      
+      ctx.fillStyle = color;
+      ctx.beginPath();
+      ctx.arc(screenX, screenY, visualSize, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
 }
 
 function renderText() {
