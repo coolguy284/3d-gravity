@@ -11,4 +11,6 @@ function renderText() {
   dist_text.textContent = dist.toExponential(3);
   elev_text.textContent = (elev * 180 / Math.PI).toFixed(2);
   azim_text.textContent = (azim * 180 / Math.PI).toFixed(2);
+  scenario_text.textContent = scenarioNum;
+  running_text.textContent = running;
 }

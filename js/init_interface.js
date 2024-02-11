@@ -1,6 +1,27 @@
 addEventListener('keydown', evt => {
   switch (evt.code) {
     case 'Space':
+      // pause/play
+      running = !running;
+      break;
+    
+    case 'R':
+      // reset
+      resetScenario();
+      break;
+    
+    case 'ArrowLeft':
+      // previous scenario
+      scenario--;
+      scenario = Math.max(scenario, 0);
+      resetScenario();
+      break;
+    
+    case 'ArrowRight':
+      // next scenario
+      scenario++;
+      scenario = Math.min(scenario, SCENARIOS.length - 1);
+      resetScenario();
       break;
   }
 });
