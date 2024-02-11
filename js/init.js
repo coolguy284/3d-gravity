@@ -8,7 +8,9 @@ addEventListener('resize', () => setCanvasSize());
   while (true) {
     let now = Date.now();
     
-    simulate((now - pastNow) / 1000);
+    if (running) {
+      simulate((now - pastNow) / 1000);
+    }
     render();
     renderText();
     

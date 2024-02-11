@@ -1,18 +1,29 @@
 function render() {
   ctx.clearRect(-aspect, -1, aspect * 2, 2);
   
-  for (let [ mass, color, density, x, y, z, _vx, _vy, _vz ] of particles) {
+  let visualParticles = particles.map(([ mass, color, density, x, y, z, _vx, _vy, _vz ]) => {
     let [ visible, screenX, screenY, objDist ] = transform3DTo2D(x, y, z, dist, elev, azim);
     
     if (visible) {
       let size = (mass / density) ** (1 / 3);
       let visualSize = size / objDist;
       
-      ctx.fillStyle = color;
-      ctx.beginPath();
-      ctx.arc(screenX, screenY, visualSize, 0, Math.PI * 2);
-      ctx.fill();
+      return [screenX, screenY, objDist, visualSize, color];
+    } else {
+      return null;
     }
+  }).filter(x => x != null);
+  
+  // put nearest objects last in array
+  visualParticles.sort(([ _1, _2, objDistA, _3, _4 ], [ _5, _6, objDistB, _7, _8 ]) => {
+    return objDistB - objDistA;
+  });
+  
+  for (let [ screenX, screenY, _objDist, visualSize, color ] of visualParticles) {
+    ctx.fillStyle = color;
+    ctx.beginPath();
+    ctx.arc(screenX, screenY, visualSize, 0, Math.PI * 2);
+    ctx.fill();
   }
 }
 

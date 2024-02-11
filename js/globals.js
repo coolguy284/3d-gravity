@@ -4,11 +4,12 @@ let ctx = canvas.getContext('2d');
 
 let mouseIsDown = false;
 
-let dist = 10;
-let distExponent = 1;
-let elev = 0;
+let distExponent = 1.5;
+let dist = 10 ** distExponent;
+let elev = Math.PI / 4;
 let azim = 0;
-let scenarioNum = 0;
+let scenarioNum = 1;
 
-let particles = copyScenario(SCENARIOS[0]);
+let particles = copyScenario(SCENARIOS[scenarioNum]);
 let running = false;
+let rng;
