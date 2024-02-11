@@ -35,20 +35,29 @@ SCENARIOS.push((() => {
   return particles;
 })());
 
-SCENARIOS.push((() => {
-  let particles = [];
+function addGalaxy(
+  particles,
+  {
+    x: centerX, y: centerY, z: centerZ,
+    vx: centerVX, vy: centerVY, vz: centerVZ,
+    
+    bigMass,
+    bigColor,
+    
+    littleColor,
+    littleCount,
+    littleTotalMass,
+    littleMinDist,
+    littleDistSpan,
+    littleDistThick,
+  }
+) {
+  let density = 10;
   
-  let bigMass = 100;
-  let littleCount = 500;
-  let littleTotalMass = 10;
   let littleIndividMass = littleTotalMass / littleCount;
   let totMass = bigMass + littleTotalMass;
   
-  let littleMinDist = 4;
-  let littleDistSpan = 4;
-  let littleDistThick = 0.1;
-  
-  particles.push([bigMass, 'blue', 10, 0, 0, 0, 0, 0, 0]);
+  particles.push([bigMass, bigColor, density, centerX, centerY, centerZ, centerVX, centerVY, centerVZ]);
   
   for (let i = 0; i < littleCount; i++) {
     let random = normals();
@@ -70,8 +79,28 @@ SCENARIOS.push((() => {
     
     let y = (rng() - 0.5) * littleDistThick;
     
-    particles.push([littleIndividMass, 'yellow', 10, x, y, z, vx, 0, vz]);
+    particles.push([littleIndividMass, littleColor, density, x + centerX, y + centerY, z + centerZ, vx + centerVX, centerVY, vz +  + centerVZ]);
   }
+}
+
+SCENARIOS.push((() => {
+  let particles = [];
+  
+  addGalaxy(
+    particles,
+    {
+      x: 0, y: 0, z: 0,
+      vx: 0, vy: 0, vz: 0,
+      bigMass: 100,
+      bigColor: 'blue',
+      littleColor: 'yellow',
+      littleCount: 500,
+      littleTotalMass: 10,
+      littleMinDist: 2,
+      littleDistSpan: 4,
+      littleDistThick: 2,
+    }
+  );
   
   return particles;
 })());
