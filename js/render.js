@@ -33,4 +33,5 @@ function renderText() {
   azim_text.textContent = (azim * 180 / Math.PI).toFixed(2);
   scenario_text.textContent = scenarioNum;
   running_text.textContent = running;
+  time_text.textContent = time.toFixed(2);
 }
