@@ -7,6 +7,7 @@ let SEED = 'sus';
 let TIME_RATE = 1;
 let GRAV_STRENGTH = 1;
 let GRAV_DIST_LOWER_LIMIT = 1;
+let MAX_TIME_STEP = 0.015;
 
 let SCENARIOS = [
   /*

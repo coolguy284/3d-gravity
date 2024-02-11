@@ -9,7 +9,7 @@ addEventListener('resize', () => setCanvasSize());
     let now = Date.now();
     
     let realTimeStep = (now - pastNow) / 1000;
-    let simTimeStep = realTimeStep * TIME_RATE;
+    let simTimeStep = Math.min(realTimeStep * TIME_RATE, MAX_TIME_STEP);
     
     interfaceUpdate(realTimeStep);
     if (running) {

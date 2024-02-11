@@ -204,12 +204,12 @@ function _addSystem(particles, system, density, parentInfo) {
     vy += parentInfo.vy;
     vz += parentInfo.vz;
     
-    if (system.orbit) {
+    if (system.orbit != 0) {
       let dist = Math.hypot(system.x, system.z);
       let ang = Math.atan2(system.z, system.x);
       
       let transverseAng = ang + Math.PI / 2;
-      let speed = Math.sqrt(GRAV_STRENGTH * parentInfo.mass / dist);
+      let speed = Math.sqrt(GRAV_STRENGTH * parentInfo.mass / dist) * system.orbit;
       
       vx += Math.cos(transverseAng) * speed;
       vz += Math.sin(transverseAng) * speed;
@@ -539,6 +539,19 @@ SCENARIOS.push((() => {
                 { x: 0, y: 0, z: 10, vx: 0, vy: 0, vz: 0, orbit: true, main: { mass: 1, color: 'red' } },
               ],
             },
+            /*{
+              x: 0, y: 0, z: 30000, vx: 0, vy: 0, vz: 0, orbit: -1, main: { mass: 100, color: 'yellow' },
+              subsystems: [
+                { x: 0, y: 0, z: 6, vx: 0, vy: 0, vz: 0, orbit: true, main: { mass: 1, color: 'green' } },
+                { x: 0, y: 0, z: 10, vx: 0, vy: 0, vz: 0, orbit: true, main: { mass: 1, color: 'red' } },
+                {
+                  x: 0, y: 0, z: 30, vx: 0, vy: 0, vz: 0, orbit: true, main: { mass: 4, color: 'yellow' },
+                  subsystems: [
+                    { x: 1, y: 0, z: 0, vx: 0, vy: 0, vz: 0, orbit: true, main: { mass: 0.1, color: 'green' } },
+                  ],
+                },
+              ],
+            },*/
           ],
         },
       ],
