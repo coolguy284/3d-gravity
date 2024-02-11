@@ -55,7 +55,7 @@ function addGalaxy(
   let density = 10;
   
   let littleIndividMass = littleTotalMass / littleCount;
-  let totMass = bigMass + littleTotalMass;
+  let orbitMass = bigMass + littleTotalMass * 0.3;
   
   particles.push([bigMass, bigColor, density, centerX, centerY, centerZ, centerVX, centerVY, centerVZ]);
   
@@ -68,7 +68,7 @@ function addGalaxy(
     dist += littleMinDist;
     // https://en.wikipedia.org/wiki/Orbital_speed
     // sqrt(G * M / dist)
-    let speed = Math.sqrt(GRAV_STRENGTH * totMass / dist);
+    let speed = Math.sqrt(GRAV_STRENGTH * orbitMass / dist);
     let tangentAng = ang + Math.PI / 2;
     [ x, z ] = [
       Math.cos(ang) * dist,
@@ -96,6 +96,44 @@ SCENARIOS.push((() => {
       littleColor: 'yellow',
       littleCount: 500,
       littleTotalMass: 10,
+      littleMinDist: 2,
+      littleDistSpan: 4,
+      littleDistThick: 2,
+    }
+  );
+  
+  return particles;
+})());
+
+SCENARIOS.push((() => {
+  let particles = [];
+  
+  addGalaxy(
+    particles,
+    {
+      x: 0, y: 0, z: 0,
+      vx: 0, vy: 0, vz: 0,
+      bigMass: 100,
+      bigColor: 'blue',
+      littleColor: 'yellow',
+      littleCount: 500,
+      littleTotalMass: 100,
+      littleMinDist: 2,
+      littleDistSpan: 4,
+      littleDistThick: 2,
+    }
+  );
+  
+  addGalaxy(
+    particles,
+    {
+      x: 100, y: 4, z: 0,
+      vx: 0, vy: 0, vz: 0,
+      bigMass: 100,
+      bigColor: 'blue',
+      littleColor: 'yellow',
+      littleCount: 500,
+      littleTotalMass: 100,
       littleMinDist: 2,
       littleDistSpan: 4,
       littleDistThick: 2,
