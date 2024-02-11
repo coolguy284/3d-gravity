@@ -308,3 +308,244 @@ SCENARIOS.push((() => {
   
   return particles;
 })());
+
+SCENARIOS.push((() => {
+  let particles = [];
+  
+  let density = 10;
+  
+  let systems = [
+    {
+      x: 0, y: 0, z: 0, vx: 0, vy: 0, vz: 0,
+      orbit: false,
+      main: {
+        mass: 1000000000,
+        color: 'blue',
+      },
+      subsystems: [
+        {
+          x: 1000, y: 0, z: 0, vx: 0, vy: 0, vz: 0,
+          orbit: true,
+          main: {
+            mass: 100000,
+            color: 'orange',
+          },
+        },
+        {
+          x: 30000, y: 0, z: 0, vx: 0, vy: 0, vz: 0,
+          orbit: false,
+          main: {
+            mass: 100,
+            color: 'yellow',
+          },
+          subsystems: [
+            {
+              x: 0, y: 0, z: 6, vx: 0, vy: 0, vz: 0,
+              orbit: true,
+              main: {
+                mass: 1,
+                color: 'green',
+              }
+            },
+            {
+              x: 0, y: 0, z: 10, vx: 0, vy: 0, vz: 0,
+              orbit: true,
+              main: {
+                mass: 1,
+                color: 'red',
+              }
+            },
+          ],
+        },
+        {
+          x: 30030, y: 0, z: 0, vx: 0, vy: 0, vz: 0,
+          orbit: true,
+          main: {
+            mass: 100,
+            color: 'white',
+          },
+          subsystems: [
+            {
+              x: 0, y: 0, z: 6, vx: 0, vy: 0, vz: 0,
+              orbit: true,
+              main: {
+                mass: 1,
+                color: 'green',
+              }
+            },
+            {
+              x: 0, y: 0, z: 10, vx: 0, vy: 0, vz: 0,
+              orbit: true,
+              main: {
+                mass: 1,
+                color: 'red',
+              }
+            },
+          ],
+        },
+      ],
+    },
+    {
+      x: 0, y: 50000, z: 0, vx: 0, vy: 0, vz: 0,
+      orbit: false,
+      main: {
+        mass: 1000000000,
+        color: 'blue',
+      },
+      subsystems: [
+        {
+          x: 1000, y: 0, z: 0, vx: 0, vy: 0, vz: 0,
+          orbit: true,
+          main: {
+            mass: 100000,
+            color: 'orange',
+          },
+        },
+        {
+          x: 30000, y: 0, z: 0, vx: 0, vy: 0, vz: 0,
+          orbit: false,
+          main: {
+            mass: 100,
+            color: 'yellow',
+          },
+          subsystems: [
+            {
+              x: 0, y: 0, z: 6, vx: 0, vy: 0, vz: 0,
+              orbit: true,
+              main: {
+                mass: 1,
+                color: 'green',
+              }
+            },
+            {
+              x: 0, y: 0, z: 10, vx: 0, vy: 0, vz: 0,
+              orbit: true,
+              main: {
+                mass: 1,
+                color: 'red',
+              }
+            },
+          ],
+        },
+        {
+          x: 30030, y: 0, z: 0, vx: 0, vy: 0, vz: 0,
+          orbit: true,
+          main: {
+            mass: 100,
+            color: 'white',
+          },
+          subsystems: [
+            {
+              x: 0, y: 0, z: 6, vx: 0, vy: 0, vz: 0,
+              orbit: true,
+              main: {
+                mass: 1,
+                color: 'green',
+              }
+            },
+            {
+              x: 0, y: 0, z: 10, vx: 0, vy: 0, vz: 0,
+              orbit: true,
+              main: {
+                mass: 1,
+                color: 'red',
+              }
+            },
+          ],
+        },
+      ],
+    }
+  ];
+  
+  addSystems(particles, systems, density);
+  
+  return particles;
+})());
+
+SCENARIOS.push((() => {
+  let particles = [];
+  
+  let density = 10;
+  
+  let systems = [
+    {
+      x: 0, y: 0, z: 0, vx: 0, vy: 0, vz: 0, orbit: false, main: { mass: 1e15, color: 'white'  },
+      subsystems: [
+        {
+          x: 0, y: 0, z: -1e7, vx: 0, vy: 0, vz: 0, orbit: false, main: { mass: 1e9, color: 'blue' },
+          subsystems: [
+            { x: 1000, y: 0, z: 0, vx: 0, vy: 0, vz: 0, orbit: true, main: { mass: 1e5, color: 'orange' } },
+            {
+              x: 30000, y: 0, z: 0, vx: 0, vy: 0, vz: 0, orbit: true, main: { mass: 100, color: 'yellow' },
+              subsystems: [
+                { x: 0, y: 0, z: 6, vx: 0, vy: 0, vz: 0, orbit: true, main: { mass: 1, color: 'green' } },
+                { x: 0, y: 0, z: 10, vx: 0, vy: 0, vz: 0, orbit: true, main: { mass: 1, color: 'red' } },
+                {
+                  x: 0, y: 0, z: 30, vx: 0, vy: 0, vz: 0, orbit: true, main: { mass: 4, color: 'yellow' },
+                  subsystems: [
+                    { x: 1, y: 0, z: 0, vx: 0, vy: 0, vz: 0, orbit: true, main: { mass: 0.1, color: 'green' } },
+                  ],
+                },
+              ],
+            },
+            {
+              x: 30300, y: 0, z: 0, vx: 0, vy: 0, vz: 0, orbit: true, main: { mass: 100, color: 'white' },
+              subsystems: [
+                { x: 0, y: 0, z: 6, vx: 0, vy: 0, vz: 0, orbit: true, main: { mass: 1, color: 'green' } },
+                { x: 0, y: 0, z: 10, vx: 0, vy: 0, vz: 0, orbit: true, main: { mass: 1, color: 'red' } },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+  ];
+  
+  addSystems(particles, systems, density);
+  
+  return particles;
+})());
+
+SCENARIOS.push((() => {
+  let particles = [];
+  
+  let density = 10;
+  
+  let systems = [
+    {
+      x: 0, y: 0, z: 0, vx: 0, vy: 0, vz: 0, orbit: false, main: { mass: 1e15, color: 'white'  },
+      subsystems: [
+        {
+          x: 0, y: 0, z: -1e7, vx: 0, vy: 0, vz: 0, orbit: true, main: { mass: 1e9, color: 'blue' },
+          subsystems: [
+            { x: 1000, y: 0, z: 0, vx: 0, vy: 0, vz: 0, orbit: true, main: { mass: 1e5, color: 'orange' } },
+            {
+              x: 30000, y: 0, z: 0, vx: 0, vy: 0, vz: 0, orbit: true, main: { mass: 100, color: 'yellow' },
+              subsystems: [
+                { x: 0, y: 0, z: 6, vx: 0, vy: 0, vz: 0, orbit: true, main: { mass: 1, color: 'green' } },
+                { x: 0, y: 0, z: 10, vx: 0, vy: 0, vz: 0, orbit: true, main: { mass: 1, color: 'red' } },
+                {
+                  x: 0, y: 0, z: 30, vx: 0, vy: 0, vz: 0, orbit: true, main: { mass: 4, color: 'yellow' },
+                  subsystems: [
+                    { x: 1, y: 0, z: 0, vx: 0, vy: 0, vz: 0, orbit: true, main: { mass: 0.1, color: 'green' } },
+                  ],
+                },
+              ],
+            },
+            {
+              x: 30300, y: 0, z: 0, vx: 0, vy: 0, vz: 0, orbit: true, main: { mass: 100, color: 'white' },
+              subsystems: [
+                { x: 0, y: 0, z: 6, vx: 0, vy: 0, vz: 0, orbit: true, main: { mass: 1, color: 'green' } },
+                { x: 0, y: 0, z: 10, vx: 0, vy: 0, vz: 0, orbit: true, main: { mass: 1, color: 'red' } },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+  ];
+  
+  addSystems(particles, systems, density);
+  
+  return particles;
+})());

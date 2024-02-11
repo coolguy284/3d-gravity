@@ -5,7 +5,7 @@ addEventListener('keydown', evt => {
       running = !running;
       break;
     
-    case 'KeyT':
+    case 'KeyP':
       // reset
       resetScenario();
       break;

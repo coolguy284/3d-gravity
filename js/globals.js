@@ -12,8 +12,8 @@ let distExponent = 1.5;
 let dist = 10 ** distExponent;
 let elev = Math.PI / 4;
 let azim = 0;
-let scenarioNum = 6;
-let trackObj = 1;
+let scenarioNum = 8;
+let trackObj = 3;
 let currentlyTracking = true;
 
 let particles = copyScenario(SCENARIOS[scenarioNum]);
