@@ -1,11 +1,11 @@
 addEventListener('keydown', evt => {
   switch (evt.code) {
-    case 'KeyF':
+    case 'Space':
       // pause/play
       running = !running;
       break;
     
-    case 'KeyR':
+    case 'KeyT':
       // reset
       resetScenario();
       break;
@@ -24,7 +24,7 @@ addEventListener('keydown', evt => {
       resetScenario();
       break;
     
-    case 'KeyT':
+    case 'KeyG':
       // toggle tracking
       currentlyTracking = !currentlyTracking;
       break;
@@ -104,11 +104,11 @@ function interfaceUpdate(timeStep) {
       centerZ += Math.sin(angle) * MOVEMENT_SPEED * timeStep;
     }
     
-    if (currentKeys.has('Space')) {
+    if (currentKeys.has('KeyR')) {
       centerY += MOVEMENT_SPEED * timeStep;
     }
     
-    if (currentKeys.has('ShiftLeft')) {
+    if (currentKeys.has('KeyF')) {
       centerY -= MOVEMENT_SPEED * timeStep;
     }
   }

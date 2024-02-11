@@ -5,7 +5,7 @@ function render() {
     let [ visible, screenX, screenY, objDist ] = transform3DTo2D(x, y, z, dist, elev, azim);
     
     if (visible) {
-      let size = (mass / density) ** (1 / 3);
+      let size = Math.abs(mass / density) ** (1 / 3);
       let visualSize = size / objDist;
       
       return [screenX, screenY, objDist, visualSize, color];
