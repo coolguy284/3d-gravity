@@ -69,6 +69,7 @@ function addGalaxy(
     dist += littleMinDist;
     // https://en.wikipedia.org/wiki/Orbital_speed
     // sqrt(G * M / dist)
+    //let orbitMass = bigMass + littleTotalMass * (dist - littleMinDist) / littleDistSpan / 4;
     let speed = Math.sqrt(GRAV_STRENGTH * orbitMass / dist);
     let tangentAng = ang + Math.PI / 2;
     [ x, z ] = [
@@ -183,6 +184,127 @@ SCENARIOS.push((() => {
       galaxySpinMassFactor: 0.5,
     }
   );
+  
+  return particles;
+})());
+
+function _addSystem(particles, system, density, parentInfo) {
+  let x = system.x;
+  let y = system.y;
+  let z = system.z;
+  let vx = system.vx;
+  let vy = system.vy;
+  let vz = system.vz;
+  
+  if (parentInfo) {
+    x += parentInfo.x;
+    y += parentInfo.y;
+    z += parentInfo.z;
+    vx += parentInfo.vx;
+    vy += parentInfo.vy;
+    vz += parentInfo.vz;
+    
+    if (system.orbit) {
+      let dist = Math.hypot(system.x, system.z);
+      let ang = Math.atan2(system.z, system.x);
+      
+      let transverseAng = ang + Math.PI / 2;
+      let speed = Math.sqrt(GRAV_STRENGTH * parentInfo.mass / dist);
+      
+      vx += Math.cos(transverseAng) * speed;
+      vz += Math.sin(transverseAng) * speed;
+    }
+  }
+  
+  particles.push([system.main.mass, system.main.color, density, x, y, z, vx, vy, vz]);
+  
+  if (system.subsystems) {
+    for (let subSystem of system.subsystems) {
+      _addSystem(particles, subSystem, density, {
+        mass: system.main.mass,
+        x, y, z, vx, vy, vz,
+      });
+    }
+  }
+}
+
+function addSystems(particles, systems, density) {
+  for (let system of systems) {
+    _addSystem(particles, system, density, null);
+  }
+}
+
+SCENARIOS.push((() => {
+  let particles = [];
+  
+  let density = 10;
+  
+  let systems = [
+    {
+      x: 0, y: 0, z: 0, vx: 0, vy: 0, vz: 0,
+      orbit: false,
+      main: {
+        mass: 1000000000,
+        color: 'blue',
+      },
+      subsystems: [
+        {
+          x: 30000, y: 0, z: 0, vx: 0, vy: 0, vz: 0,
+          orbit: false,
+          main: {
+            mass: 100,
+            color: 'yellow',
+          },
+          subsystems: [
+            {
+              x: 0, y: 0, z: 6, vx: 0, vy: 0, vz: 0,
+              orbit: true,
+              main: {
+                mass: 1,
+                color: 'green',
+              }
+            },
+            {
+              x: 0, y: 0, z: 10, vx: 0, vy: 0, vz: 0,
+              orbit: true,
+              main: {
+                mass: 1,
+                color: 'red',
+              }
+            },
+          ],
+        },
+        {
+          x: 30030, y: 0, z: 0, vx: 0, vy: 0, vz: 0,
+          orbit: true,
+          main: {
+            mass: 100,
+            color: 'white',
+          },
+          subsystems: [
+            {
+              x: 0, y: 0, z: 6, vx: 0, vy: 0, vz: 0,
+              orbit: true,
+              main: {
+                mass: 1,
+                color: 'green',
+              }
+            },
+            {
+              x: 0, y: 0, z: 10, vx: 0, vy: 0, vz: 0,
+              orbit: true,
+              main: {
+                mass: 1,
+                color: 'red',
+              }
+            },
+          ],
+        },
+      ],
+    }
+  ];
+  
+  addSystems(particles, systems, density);
   
   return particles;
 })());
