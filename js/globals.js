@@ -18,5 +18,4 @@ let currentlyTracking = true;
 
 let particles = copyScenario(SCENARIOS[scenarioNum]);
 let running = false;
-let rng;
 let time = 0;

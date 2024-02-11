@@ -1,7 +1,3 @@
-function copyScenario(scenario) {
-  return scenario.map(x => Array.from(x));
-}
-
 SCENARIOS.push([
   [1, 'rgba(255, 255, 255, 0.4)', 10, 0, 0, 0, 0, 0, 0],
   [1, 'rgba(255, 0, 0, 0.4)', 10, 1, 0, 0, 0, 0, 0],
@@ -34,56 +30,6 @@ SCENARIOS.push((() => {
   
   return particles;
 })());
-
-function addGalaxy(
-  particles,
-  {
-    x: centerX, y: centerY, z: centerZ,
-    vx: centerVX, vy: centerVY, vz: centerVZ,
-    
-    bigMass,
-    bigColor,
-    
-    littleColor,
-    littleCount,
-    littleTotalMass,
-    littleMinDist,
-    littleDistSpan,
-    littleDistThick,
-    galaxySpinMassFactor,
-  }
-) {
-  let density = 10;
-  
-  let littleIndividMass = littleTotalMass / littleCount;
-  let orbitMass = bigMass + littleTotalMass * galaxySpinMassFactor;
-  
-  particles.push([bigMass, bigColor, density, centerX, centerY, centerZ, centerVX, centerVY, centerVZ]);
-  
-  for (let i = 0; i < littleCount; i++) {
-    let random = normals();
-    let x = random[0] * littleDistSpan;
-    let z = random[1] * littleDistSpan;
-    let dist = Math.hypot(x, z);
-    let ang = Math.atan2(x, z);
-    dist += littleMinDist;
-    // https://en.wikipedia.org/wiki/Orbital_speed
-    // sqrt(G * M / dist)
-    //let orbitMass = bigMass + littleTotalMass * (dist - littleMinDist) / littleDistSpan / 4;
-    let speed = Math.sqrt(GRAV_STRENGTH * orbitMass / dist);
-    let tangentAng = ang + Math.PI / 2;
-    [ x, z ] = [
-      Math.cos(ang) * dist,
-      Math.sin(ang) * dist,
-    ];
-    let vx = Math.cos(tangentAng) * speed;
-    let vz = Math.sin(tangentAng) * speed;
-    
-    let y = (rng() - 0.5) * littleDistThick;
-    
-    particles.push([littleIndividMass, littleColor, density, x + centerX, y + centerY, z + centerZ, vx + centerVX, centerVY, vz +  + centerVZ]);
-  }
-}
 
 SCENARIOS.push((() => {
   let particles = [];
@@ -187,52 +133,6 @@ SCENARIOS.push((() => {
   
   return particles;
 })());
-
-function _addSystem(particles, system, density, parentInfo) {
-  let x = system.x;
-  let y = system.y;
-  let z = system.z;
-  let vx = system.vx;
-  let vy = system.vy;
-  let vz = system.vz;
-  
-  if (parentInfo) {
-    x += parentInfo.x;
-    y += parentInfo.y;
-    z += parentInfo.z;
-    vx += parentInfo.vx;
-    vy += parentInfo.vy;
-    vz += parentInfo.vz;
-    
-    if (system.orbit != 0) {
-      let dist = Math.hypot(system.x, system.z);
-      let ang = Math.atan2(system.z, system.x);
-      
-      let transverseAng = ang + Math.PI / 2;
-      let speed = Math.sqrt(GRAV_STRENGTH * parentInfo.mass / dist) * system.orbit;
-      
-      vx += Math.cos(transverseAng) * speed;
-      vz += Math.sin(transverseAng) * speed;
-    }
-  }
-  
-  particles.push([system.main.mass, system.main.color, density, x, y, z, vx, vy, vz]);
-  
-  if (system.subsystems) {
-    for (let subSystem of system.subsystems) {
-      _addSystem(particles, subSystem, density, {
-        mass: system.main.mass,
-        x, y, z, vx, vy, vz,
-      });
-    }
-  }
-}
-
-function addSystems(particles, systems, density) {
-  for (let system of systems) {
-    _addSystem(particles, system, density, null);
-  }
-}
 
 SCENARIOS.push((() => {
   let particles = [];
@@ -552,6 +452,76 @@ SCENARIOS.push((() => {
                 },
               ],
             },*/
+          ],
+        },
+      ],
+    },
+  ];
+  
+  addSystems(particles, systems, density);
+  
+  return particles;
+})());
+
+SCENARIOS.push((() => {
+  let particles = [];
+  
+  let density = 10;
+  
+  let systems = [
+    {
+      x: 0, y: 0, z: 0, vx: 0, vy: 0, vz: 0, orbit: false, main: { mass: 1e15, color: 'white'  },
+      subsystems: [
+        {
+          x: 0, y: 0, z: -1e7, vx: 0, vy: 0, vz: 0, orbit: false, main: { mass: 1e9, color: 'blue' },
+          subsystems: [
+            { x: 1000, y: 0, z: 0, vx: 0, vy: 0, vz: 0, orbit: true, main: { mass: 1e5, color: 'orange' } },
+            {
+              x: 30000, y: 0, z: 0, vx: 0, vy: 0, vz: 0, orbit: true, main: { mass: 100, color: 'yellow' },
+              subsystems: [
+                { x: 0, y: 0, z: 6, vx: 0, vy: 0, vz: 0, orbit: true, main: { mass: 1, color: 'green' } },
+                { x: 0, y: 0, z: 10, vx: 0, vy: 0, vz: 0, orbit: true, main: { mass: 1, color: 'red' } },
+                {
+                  x: 0, y: 0, z: 30, vx: 0, vy: 0, vz: 0, orbit: true, main: { mass: 4, color: 'yellow' },
+                  subsystems: [
+                    { x: 1, y: 0, z: 0, vx: 0, vy: 0, vz: 0, orbit: true, main: { mass: 0.1, color: 'green' } },
+                  ],
+                },
+              ],
+            },
+            {
+              x: 30300, y: 0, z: 0, vx: 0, vy: 0, vz: 0, orbit: true, main: { mass: 100, color: 'white' },
+              subsystems: [
+                { x: 0, y: 0, z: 6, vx: 0, vy: 0, vz: 0, orbit: true, main: { mass: 1, color: 'green' } },
+                { x: 0, y: 0, z: 10, vx: 0, vy: 0, vz: 0, orbit: true, main: { mass: 1, color: 'red' } },
+              ],
+            },
+          ],
+        },
+        {
+          x: 0, y: 0, z: -1e7, vx: 0, vy: 0, vz: 0, orbit: false, main: { mass: 1e9, color: 'blue' },
+          subsystems: [
+            { x: 1000, y: 0, z: 0, vx: 0, vy: 0, vz: 0, orbit: true, main: { mass: 1e5, color: 'orange' } },
+            {
+              x: 30000, y: 0, z: 0, vx: 0, vy: 0, vz: 0, orbit: true, main: { mass: 100, color: 'yellow' },
+              subsystems: [
+                { x: 0, y: 0, z: 6, vx: 0, vy: 0, vz: 0, orbit: true, main: { mass: 1, color: 'green' } },
+                { x: 0, y: 0, z: 10, vx: 0, vy: 0, vz: 0, orbit: true, main: { mass: 1, color: 'red' } },
+                {
+                  x: 0, y: 0, z: 30, vx: 0, vy: 0, vz: 0, orbit: true, main: { mass: 4, color: 'yellow' },
+                  subsystems: [
+                    { x: 1, y: 0, z: 0, vx: 0, vy: 0, vz: 0, orbit: true, main: { mass: 0.1, color: 'green' } },
+                  ],
+                },
+              ],
+            },
+            {
+              x: 30300, y: 0, z: 0, vx: 0, vy: 0, vz: 0, orbit: true, main: { mass: 100, color: 'white' },
+              subsystems: [
+                { x: 0, y: 0, z: 6, vx: 0, vy: 0, vz: 0, orbit: true, main: { mass: 1, color: 'green' } },
+                { x: 0, y: 0, z: 10, vx: 0, vy: 0, vz: 0, orbit: true, main: { mass: 1, color: 'red' } },
+              ],
+            },
           ],
         },
       ],

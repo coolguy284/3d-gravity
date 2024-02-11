@@ -32,7 +32,7 @@ function uint32_gen_to_01(func) {
 }
 
 let _xmur = xmur3(SEED);
-rng = uint32_gen_to_01(sfc32_lightweight_uint32(_xmur(), _xmur(), _xmur(), _xmur()));
+let rng = uint32_gen_to_01(sfc32_lightweight_uint32(_xmur(), _xmur(), _xmur(), _xmur()));
 
 function normals() {
   // https://en.wikipedia.org/wiki/Box%E2%80%93Muller_transform
