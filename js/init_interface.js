@@ -1,11 +1,11 @@
 addEventListener('keydown', evt => {
   switch (evt.code) {
-    case 'Space':
+    case 'KeyF':
       // pause/play
       running = !running;
       break;
     
-    case 'R':
+    case 'KeyR':
       // reset
       resetScenario();
       break;
@@ -24,6 +24,12 @@ addEventListener('keydown', evt => {
       resetScenario();
       break;
   }
+  
+  currentKeys.add(evt.code);
+});
+
+addEventListener('keyup', evt => {
+  currentKeys.delete(evt.code);
 });
 
 addEventListener('mousedown', () => {
@@ -49,3 +55,41 @@ addEventListener('wheel', evt => {
   distExponent = Math.min(Math.max(distExponent, ZOOM_EXPONENT_MIN), ZOOM_EXPONENT_MAX);
   dist = 10 ** distExponent;
 });
+
+function interfaceUpdate(timeStep) {
+  if (currentKeys.has('KeyW')) {
+    let angle = azim + Math.PI;
+      
+    centerX += Math.cos(angle) * MOVEMENT_SPEED * timeStep;
+    centerZ += Math.sin(angle) * MOVEMENT_SPEED * timeStep;
+  }
+  
+  if (currentKeys.has('KeyS')) {
+    let angle = azim;
+      
+    centerX += Math.cos(angle) * MOVEMENT_SPEED * timeStep;
+    centerZ += Math.sin(angle) * MOVEMENT_SPEED * timeStep;
+  }
+  
+  if (currentKeys.has('KeyA')) {
+    let angle = azim + Math.PI * 1.5;
+      
+    centerX += Math.cos(angle) * MOVEMENT_SPEED * timeStep;
+    centerZ += Math.sin(angle) * MOVEMENT_SPEED * timeStep;
+  }
+  
+  if (currentKeys.has('KeyD')) {
+    let angle = azim + Math.PI * 0.5;
+      
+    centerX += Math.cos(angle) * MOVEMENT_SPEED * timeStep;
+    centerZ += Math.sin(angle) * MOVEMENT_SPEED * timeStep;
+  }
+  
+  if (currentKeys.has('Space')) {
+    centerY += MOVEMENT_SPEED * timeStep;
+  }
+  
+  if (currentKeys.has('ShiftLeft')) {
+    centerY -= MOVEMENT_SPEED * timeStep;
+  }
+}

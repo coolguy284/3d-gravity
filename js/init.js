@@ -8,8 +8,12 @@ addEventListener('resize', () => setCanvasSize());
   while (true) {
     let now = Date.now();
     
+    let realTimeStep = (now - pastNow) / 1000;
+    let simTimeStep = realTimeStep * TIME_RATE;
+    
+    interfaceUpdate(realTimeStep);
     if (running) {
-      simulate((now - pastNow) / 1000 * TIME_RATE);
+      simulate(simTimeStep);
     }
     render();
     renderText();

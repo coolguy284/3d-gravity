@@ -6,6 +6,11 @@ function rotate2D(x, y, amount) {
 }
 
 function transform3DTo2D(x, y, z, dist, elev, azim) {
+  // move coords based on center point
+  x -= centerX;
+  y -= centerY;
+  z -= centerZ;
+  
   // rotate x, y, z to elev, azim
   [ x, z ] = rotate2D(x, z, -azim);
   
