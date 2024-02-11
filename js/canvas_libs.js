@@ -7,5 +7,5 @@ function setCanvasSize() {
   
   ctx.resetTransform();
   ctx.translate(width / 2, height / 2);
-  ctx.scale(height / 2, height / 2);
+  ctx.scale(height / 2, -height / 2);
 }

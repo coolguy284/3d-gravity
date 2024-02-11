@@ -5,6 +5,7 @@ addEventListener('resize', () => setCanvasSize());
   
   while (true) {
     render();
+    renderText();
     
     await new Promise(r => requestAnimationFrame(r));
   }
