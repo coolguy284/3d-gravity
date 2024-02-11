@@ -50,12 +50,13 @@ function addGalaxy(
     littleMinDist,
     littleDistSpan,
     littleDistThick,
+    galaxySpinMassFactor,
   }
 ) {
   let density = 10;
   
   let littleIndividMass = littleTotalMass / littleCount;
-  let orbitMass = bigMass + littleTotalMass * 0.3;
+  let orbitMass = bigMass + littleTotalMass * galaxySpinMassFactor;
   
   particles.push([bigMass, bigColor, density, centerX, centerY, centerZ, centerVX, centerVY, centerVZ]);
   
@@ -99,6 +100,7 @@ SCENARIOS.push((() => {
       littleMinDist: 2,
       littleDistSpan: 4,
       littleDistThick: 2,
+      galaxySpinMassFactor: 0.3,
     }
   );
   
@@ -121,6 +123,7 @@ SCENARIOS.push((() => {
       littleMinDist: 2,
       littleDistSpan: 4,
       littleDistThick: 2,
+      galaxySpinMassFactor: 0.3,
     }
   );
   
@@ -137,6 +140,47 @@ SCENARIOS.push((() => {
       littleMinDist: 2,
       littleDistSpan: 4,
       littleDistThick: 2,
+      galaxySpinMassFactor: 0.3,
+    }
+  );
+  
+  return particles;
+})());
+
+SCENARIOS.push((() => {
+  let particles = [];
+  
+  addGalaxy(
+    particles,
+    {
+      x: 0, y: 0, z: 0,
+      vx: 0, vy: 0, vz: -2,
+      bigMass: 100,
+      bigColor: 'blue',
+      littleColor: 'yellow',
+      littleCount: 500,
+      littleTotalMass: 300,
+      littleMinDist: 2,
+      littleDistSpan: 4,
+      littleDistThick: 2,
+      galaxySpinMassFactor: 0.5,
+    }
+  );
+  
+  addGalaxy(
+    particles,
+    {
+      x: 55, y: 0, z: 0,
+      vx: 0, vy: 0, vz: 2,
+      bigMass: 100,
+      bigColor: 'blue',
+      littleColor: 'yellow',
+      littleCount: 500,
+      littleTotalMass: 300,
+      littleMinDist: 2,
+      littleDistSpan: 4,
+      littleDistThick: 2,
+      galaxySpinMassFactor: 0.5,
     }
   );
   
