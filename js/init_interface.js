@@ -23,6 +23,23 @@ addEventListener('keydown', evt => {
       scenarioNum = Math.min(scenarioNum, SCENARIOS.length - 1);
       resetScenario();
       break;
+    
+    case 'KeyT':
+      // toggle tracking
+      currentlyTracking = !currentlyTracking;
+      break;
+    
+    case 'KeyY':
+      // previous object
+      trackObj--;
+      trackObj = Math.max(trackObj, 0);
+      break;
+    
+    case 'KeyU':
+      // next object
+      trackObj++;
+      trackObj = Math.min(trackObj, particles.length - 1);
+      break;
   }
   
   currentKeys.add(evt.code);
@@ -57,39 +74,42 @@ addEventListener('wheel', evt => {
 });
 
 function interfaceUpdate(timeStep) {
-  if (currentKeys.has('KeyW')) {
-    let angle = azim + Math.PI;
-      
-    centerX += Math.cos(angle) * MOVEMENT_SPEED * timeStep;
-    centerZ += Math.sin(angle) * MOVEMENT_SPEED * timeStep;
-  }
-  
-  if (currentKeys.has('KeyS')) {
-    let angle = azim;
-      
-    centerX += Math.cos(angle) * MOVEMENT_SPEED * timeStep;
-    centerZ += Math.sin(angle) * MOVEMENT_SPEED * timeStep;
-  }
-  
-  if (currentKeys.has('KeyA')) {
-    let angle = azim + Math.PI * 1.5;
-      
-    centerX += Math.cos(angle) * MOVEMENT_SPEED * timeStep;
-    centerZ += Math.sin(angle) * MOVEMENT_SPEED * timeStep;
-  }
-  
-  if (currentKeys.has('KeyD')) {
-    let angle = azim + Math.PI * 0.5;
-      
-    centerX += Math.cos(angle) * MOVEMENT_SPEED * timeStep;
-    centerZ += Math.sin(angle) * MOVEMENT_SPEED * timeStep;
-  }
-  
-  if (currentKeys.has('Space')) {
-    centerY += MOVEMENT_SPEED * timeStep;
-  }
-  
-  if (currentKeys.has('ShiftLeft')) {
-    centerY -= MOVEMENT_SPEED * timeStep;
+  // movement
+  if (!currentlyTracking) {
+    if (currentKeys.has('KeyW')) {
+      let angle = azim + Math.PI;
+        
+      centerX += Math.cos(angle) * MOVEMENT_SPEED * timeStep;
+      centerZ += Math.sin(angle) * MOVEMENT_SPEED * timeStep;
+    }
+    
+    if (currentKeys.has('KeyS')) {
+      let angle = azim;
+        
+      centerX += Math.cos(angle) * MOVEMENT_SPEED * timeStep;
+      centerZ += Math.sin(angle) * MOVEMENT_SPEED * timeStep;
+    }
+    
+    if (currentKeys.has('KeyA')) {
+      let angle = azim + Math.PI * 1.5;
+        
+      centerX += Math.cos(angle) * MOVEMENT_SPEED * timeStep;
+      centerZ += Math.sin(angle) * MOVEMENT_SPEED * timeStep;
+    }
+    
+    if (currentKeys.has('KeyD')) {
+      let angle = azim + Math.PI * 0.5;
+        
+      centerX += Math.cos(angle) * MOVEMENT_SPEED * timeStep;
+      centerZ += Math.sin(angle) * MOVEMENT_SPEED * timeStep;
+    }
+    
+    if (currentKeys.has('Space')) {
+      centerY += MOVEMENT_SPEED * timeStep;
+    }
+    
+    if (currentKeys.has('ShiftLeft')) {
+      centerY -= MOVEMENT_SPEED * timeStep;
+    }
   }
 }

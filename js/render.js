@@ -31,6 +31,7 @@ function renderText() {
   x_text.textContent = centerX.toFixed(2);
   y_text.textContent = centerY.toFixed(2);
   z_text.textContent = centerZ.toFixed(2);
+  tracking_text.textContent = `${trackObj}; ${currentlyTracking ? 'yes' : 'no'}`;
   dist_text.textContent = dist.toExponential(3);
   elev_text.textContent = (elev * 180 / Math.PI).toFixed(2);
   azim_text.textContent = (azim * 180 / Math.PI).toFixed(2);

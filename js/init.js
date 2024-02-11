@@ -15,6 +15,14 @@ addEventListener('resize', () => setCanvasSize());
     if (running) {
       simulate(simTimeStep);
     }
+    if (currentlyTracking) {
+      // set center vars to position of object
+      let [ _1, _2, _3, x, y, z, _4, _5, _6 ] = particles[trackObj];
+      
+      centerX = x;
+      centerY = y;
+      centerZ = z;
+    }
     render();
     renderText();
     
