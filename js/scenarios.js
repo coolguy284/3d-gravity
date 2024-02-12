@@ -188,7 +188,7 @@ SCENARIOS.push((() => {
   addSystems(particles, systems, density);
   
   return {
-    name: 'Orbiting System',
+    name: 'Half-Orbiting System',
     mode: '3d',
     particles,
   };
@@ -246,7 +246,7 @@ SCENARIOS.push((() => {
   addSystems(particles, systems, density);
   
   return {
-    name: '2 Orbiting Systems Crashing Into Each Other',
+    name: '2 Half-Orbiting Systems Crashing Into Each Other',
     mode: '3d',
     particles,
   };
