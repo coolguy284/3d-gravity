@@ -6,6 +6,8 @@ function setScenarioToVar() {
   let scenario = SCENARIOS[scenarioNum];
   
   particles = copyParticles(scenario.particles);
+  mode = scenario.mode;
+  scenarioName = scenario.name;
 }
 
 function addGalaxy(
