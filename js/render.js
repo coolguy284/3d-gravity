@@ -40,4 +40,5 @@ function renderText() {
   time_text.textContent = time.toFixed(2);
   TIME_RATE_text.textContent = timeRate.toExponential(2);
   time_accel_text.textContent = timeAccel;
+  fixed_time_step_text.textContent = fixedTimeStep;
 }

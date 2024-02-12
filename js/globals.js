@@ -29,6 +29,7 @@ let timeRate = 1;
  */
 let timeAccelIndex = 0;
 let timeAccel = 1;
+let fixedTimeStep = true;
 
 let particles = copyScenario(SCENARIOS[scenarioNum]);
 let running = false;

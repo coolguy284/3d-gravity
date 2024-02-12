@@ -64,6 +64,10 @@ addEventListener('keydown', evt => {
       timeAccelIndex = Math.min(timeAccelIndex, TIME_ACCEL_RATES.length - 1);
       timeAccel = TIME_ACCEL_RATES[timeAccelIndex];
       break;
+    
+    case 'Comma':
+      fixedTimeStep = !fixedTimeStep;
+      break;
   }
   
   currentKeys.add(evt.code);
