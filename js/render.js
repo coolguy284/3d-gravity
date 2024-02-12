@@ -38,4 +38,5 @@ function renderText() {
   scenario_text.textContent = scenarioNum;
   running_text.textContent = running;
   time_text.textContent = time.toFixed(2);
+  time_accel_text.textContent = timeAccelRate;
 }

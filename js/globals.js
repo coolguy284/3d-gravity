@@ -15,6 +15,18 @@ let azim = 0;
 let scenarioNum = 9;
 let trackObj = 3;
 let currentlyTracking = true;
+/**
+ * 0 = 1x 
+ * 1 = 3x
+ * 2 = 10x
+ * 3 = 30x
+ * 4 = 100x
+ * 5 = 300x
+ * 6 = 1000x
+ * 7 = 3000x
+ */
+let timeAccelRateIndex = 0;
+let timeAccelRate = 1;
 
 let particles = copyScenario(SCENARIOS[scenarioNum]);
 let running = false;

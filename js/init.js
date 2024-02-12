@@ -13,7 +13,9 @@ addEventListener('resize', () => setCanvasSize());
     
     interfaceUpdate(realTimeStep);
     if (running) {
-      simulate(simTimeStep);
+      for (let i = 0; i < timeAccelRate; i++) {
+        simulate(simTimeStep);
+      }
     }
     if (currentlyTracking) {
       // set center vars to position of object

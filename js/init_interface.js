@@ -40,6 +40,18 @@ addEventListener('keydown', evt => {
       trackObj++;
       trackObj = Math.min(trackObj, particles.length - 1);
       break;
+    
+    case 'KeyH':
+      timeAccelRateIndex--;
+      timeAccelRateIndex = Math.max(timeAccelRateIndex, 0);
+      timeAccelRate = TIME_ACCEL_RATES[timeAccelRateIndex];
+      break;
+    
+    case 'KeyJ':
+      timeAccelRateIndex++;
+      timeAccelRateIndex = Math.min(timeAccelRateIndex, TIME_ACCEL_RATES.length - 1);
+      timeAccelRate = TIME_ACCEL_RATES[timeAccelRateIndex];
+      break;
   }
   
   currentKeys.add(evt.code);
