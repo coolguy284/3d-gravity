@@ -15,6 +15,8 @@ let azim = 0;
 let scenarioNum = 9;
 let trackObj = 3;
 let currentlyTracking = true;
+let timeRateIndex = 0;
+let timeRate = 1;
 /**
  * 0 = 1x 
  * 1 = 3x
@@ -25,8 +27,8 @@ let currentlyTracking = true;
  * 6 = 1000x
  * 7 = 3000x
  */
-let timeAccelRateIndex = 0;
-let timeAccelRate = 1;
+let timeAccelIndex = 0;
+let timeAccel = 1;
 
 let particles = copyScenario(SCENARIOS[scenarioNum]);
 let running = false;

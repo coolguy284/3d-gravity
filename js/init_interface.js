@@ -42,15 +42,27 @@ addEventListener('keydown', evt => {
       break;
     
     case 'KeyH':
-      timeAccelRateIndex--;
-      timeAccelRateIndex = Math.max(timeAccelRateIndex, 0);
-      timeAccelRate = TIME_ACCEL_RATES[timeAccelRateIndex];
+      timeRateIndex--;
+      timeRateIndex = Math.max(timeRateIndex, MIN_TIME_RATE_EXPONENT_INT);
+      timeRate = 10 ** (timeRateIndex * TIME_RATE_EXPONENT_STEP + TIME_RATE_EXPONENT_BASE);
       break;
     
     case 'KeyJ':
-      timeAccelRateIndex++;
-      timeAccelRateIndex = Math.min(timeAccelRateIndex, TIME_ACCEL_RATES.length - 1);
-      timeAccelRate = TIME_ACCEL_RATES[timeAccelRateIndex];
+      timeRateIndex++;
+      timeRateIndex = Math.min(timeRateIndex, MAX_TIME_RATE_EXPONENT_INT);
+      timeRate = 10 ** (timeRateIndex * TIME_RATE_EXPONENT_STEP + TIME_RATE_EXPONENT_BASE);
+      break;
+    
+    case 'KeyN':
+      timeAccelIndex--;
+      timeAccelIndex = Math.max(timeAccelIndex, 0);
+      timeAccel = TIME_ACCEL_RATES[timeAccelIndex];
+      break;
+    
+    case 'KeyM':
+      timeAccelIndex++;
+      timeAccelIndex = Math.min(timeAccelIndex, TIME_ACCEL_RATES.length - 1);
+      timeAccel = TIME_ACCEL_RATES[timeAccelIndex];
       break;
   }
   
