@@ -1,5 +1,11 @@
-function copyScenario(scenario) {
-  return scenario.map(x => Array.from(x));
+function copyParticles(particles) {
+  return particles.map(x => Array.from(x));
+}
+
+function setScenarioToVar() {
+  let scenario = SCENARIOS[scenarioNum];
+  
+  particles = copyParticles(scenario.particles);
 }
 
 function addGalaxy(

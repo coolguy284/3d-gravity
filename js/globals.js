@@ -31,6 +31,8 @@ let timeAccelIndex = 0;
 let timeAccel = 1;
 let fixedTimeStep = true;
 
-let particles = copyScenario(SCENARIOS[scenarioNum]);
+let particles;
+let mode;
+setScenarioToVar();
 let running = false;
 let time = 0;

@@ -1,9 +1,13 @@
-SCENARIOS.push([
-  [1, 'rgba(255, 255, 255, 0.4)', 10, 0, 0, 0, 0, 0, 0],
-  [1, 'rgba(255, 0, 0, 0.4)', 10, 1, 0, 0, 0, 0, 0],
-  [1, 'rgba(0, 255, 0, 0.4)', 10, 0, 1, 0, 0, 0, 0],
-  [1, 'rgba(0, 0, 255, 0.4)', 10, 0, 0, 1, 0, 0, 0],
-]);
+SCENARIOS.push({
+  name: 'Debug 3-Axes',
+  mode: '3d',
+  particles: [
+    [1, 'rgba(255, 255, 255, 0.4)', 10, 0, 0, 0, 0, 0, 0],
+    [1, 'rgba(255, 0, 0, 0.4)', 10, 1, 0, 0, 0, 0, 0],
+    [1, 'rgba(0, 255, 0, 0.4)', 10, 0, 1, 0, 0, 0, 0],
+    [1, 'rgba(0, 0, 255, 0.4)', 10, 0, 0, 1, 0, 0, 0],
+  ],
+});
 
 SCENARIOS.push((() => {
   let particles = [];
@@ -15,7 +19,11 @@ SCENARIOS.push((() => {
     particles.push([1, 'yellow', 10, random[0] * 5, 4, random[1] * 5, 0, 1, 0]);
   }
   
-  return particles;
+  return {
+    name: 'Galaxy',
+    mode: '3d',
+    particles,
+  };
 })());
 
 SCENARIOS.push((() => {
@@ -28,7 +36,11 @@ SCENARIOS.push((() => {
     particles.push([-1, 'yellow', 10, random[0] * 5, 4, random[1] * 5, 0, 1, 0]);
   }
   
-  return particles;
+  return {
+    name: 'Galaxy With Negative Mass Stars',
+    mode: '3d',
+    particles,
+  };
 })());
 
 SCENARIOS.push((() => {
@@ -51,7 +63,11 @@ SCENARIOS.push((() => {
     }
   );
   
-  return particles;
+  return {
+    name: 'Better Galaxy',
+    mode: '3d',
+    particles,
+  };
 })());
 
 SCENARIOS.push((() => {
@@ -91,7 +107,11 @@ SCENARIOS.push((() => {
     }
   );
   
-  return particles;
+  return {
+    name: 'Galaxy Collision',
+    mode: '3d',
+    particles,
+  };
 })());
 
 SCENARIOS.push((() => {
@@ -131,7 +151,11 @@ SCENARIOS.push((() => {
     }
   );
   
-  return particles;
+  return {
+    name: 'Galaxy Collision With Motion',
+    mode: '3d',
+    particles,
+  };
 })());
 
 SCENARIOS.push((() => {
@@ -141,63 +165,20 @@ SCENARIOS.push((() => {
   
   let systems = [
     {
-      x: 0, y: 0, z: 0, vx: 0, vy: 0, vz: 0,
-      orbit: false,
-      main: {
-        mass: 1000000000,
-        color: 'blue',
-      },
+      x: 0, y: 0, z: 0, vx: 0, vy: 0, vz: 0, orbit: false, main: { mass: 1e9, color: 'blue' },
       subsystems: [
         {
-          x: 30000, y: 0, z: 0, vx: 0, vy: 0, vz: 0,
-          orbit: false,
-          main: {
-            mass: 100,
-            color: 'yellow',
-          },
+          x: 30000, y: 0, z: 0, vx: 0, vy: 0, vz: 0, orbit: false, main: { mass: 100, color: 'yellow' },
           subsystems: [
-            {
-              x: 0, y: 0, z: 6, vx: 0, vy: 0, vz: 0,
-              orbit: true,
-              main: {
-                mass: 1,
-                color: 'green',
-              }
-            },
-            {
-              x: 0, y: 0, z: 10, vx: 0, vy: 0, vz: 0,
-              orbit: true,
-              main: {
-                mass: 1,
-                color: 'red',
-              }
-            },
+            { x: 0, y: 0, z: 6, vx: 0, vy: 0, vz: 0, orbit: true, main: { mass: 1, color: 'green' } },
+            { x: 0, y: 0, z: 10, vx: 0, vy: 0, vz: 0, orbit: true, main: { mass: 1, color: 'red' } },
           ],
         },
         {
-          x: 30030, y: 0, z: 0, vx: 0, vy: 0, vz: 0,
-          orbit: true,
-          main: {
-            mass: 100,
-            color: 'white',
-          },
+          x: 30030, y: 0, z: 0, vx: 0, vy: 0, vz: 0, orbit: true, main: { mass: 100, color: 'white' },
           subsystems: [
-            {
-              x: 0, y: 0, z: 6, vx: 0, vy: 0, vz: 0,
-              orbit: true,
-              main: {
-                mass: 1,
-                color: 'green',
-              }
-            },
-            {
-              x: 0, y: 0, z: 10, vx: 0, vy: 0, vz: 0,
-              orbit: true,
-              main: {
-                mass: 1,
-                color: 'red',
-              }
-            },
+            { x: 0, y: 0, z: 6, vx: 0, vy: 0, vz: 0, orbit: true, main: { mass: 1, color: 'green' } },
+            { x: 0, y: 0, z: 10, vx: 0, vy: 0, vz: 0, orbit: true, main: { mass: 1, color: 'red' } },
           ],
         },
       ],
@@ -206,7 +187,11 @@ SCENARIOS.push((() => {
   
   addSystems(particles, systems, density);
   
-  return particles;
+  return {
+    name: 'Orbiting System',
+    mode: '3d',
+    particles,
+  };
 })());
 
 SCENARIOS.push((() => {
@@ -216,141 +201,42 @@ SCENARIOS.push((() => {
   
   let systems = [
     {
-      x: 0, y: 0, z: 0, vx: 0, vy: 0, vz: 0,
-      orbit: false,
-      main: {
-        mass: 1000000000,
-        color: 'blue',
-      },
+      x: 0, y: 0, z: 0, vx: 0, vy: 0, vz: 0, orbit: false, main: { mass: 1e9, color: 'blue' },
       subsystems: [
+        { x: 1000, y: 0, z: 0, vx: 0, vy: 0, vz: 0, orbit: true, main: { mass: 100000, color: 'orange' } },
         {
-          x: 1000, y: 0, z: 0, vx: 0, vy: 0, vz: 0,
-          orbit: true,
-          main: {
-            mass: 100000,
-            color: 'orange',
-          },
-        },
-        {
-          x: 30000, y: 0, z: 0, vx: 0, vy: 0, vz: 0,
-          orbit: false,
-          main: {
-            mass: 100,
-            color: 'yellow',
-          },
+          x: 30000, y: 0, z: 0, vx: 0, vy: 0, vz: 0, orbit: false, main: { mass: 100, color: 'yellow' },
           subsystems: [
-            {
-              x: 0, y: 0, z: 6, vx: 0, vy: 0, vz: 0,
-              orbit: true,
-              main: {
-                mass: 1,
-                color: 'green',
-              }
-            },
-            {
-              x: 0, y: 0, z: 10, vx: 0, vy: 0, vz: 0,
-              orbit: true,
-              main: {
-                mass: 1,
-                color: 'red',
-              }
-            },
+            { x: 0, y: 0, z: 6, vx: 0, vy: 0, vz: 0, orbit: true, main: { mass: 1, color: 'green' } },
+            { x: 0, y: 0, z: 10, vx: 0, vy: 0, vz: 0, orbit: true, main: { mass: 1, color: 'red' } },
           ],
         },
         {
-          x: 30030, y: 0, z: 0, vx: 0, vy: 0, vz: 0,
-          orbit: true,
-          main: {
-            mass: 100,
-            color: 'white',
-          },
+          x: 30030, y: 0, z: 0, vx: 0, vy: 0, vz: 0, orbit: true, main: { mass: 100, color: 'white' },
           subsystems: [
-            {
-              x: 0, y: 0, z: 6, vx: 0, vy: 0, vz: 0,
-              orbit: true,
-              main: {
-                mass: 1,
-                color: 'green',
-              }
-            },
-            {
-              x: 0, y: 0, z: 10, vx: 0, vy: 0, vz: 0,
-              orbit: true,
-              main: {
-                mass: 1,
-                color: 'red',
-              }
-            },
+            { x: 0, y: 0, z: 6, vx: 0, vy: 0, vz: 0, orbit: true, main: { mass: 1, color: 'green' } },
+            { x: 0, y: 0, z: 10, vx: 0, vy: 0, vz: 0, orbit: true, main: { mass: 1, color: 'red' } },
           ],
         },
       ],
     },
     {
-      x: 0, y: 50000, z: 0, vx: 0, vy: 0, vz: 0,
-      orbit: false,
-      main: {
-        mass: 1000000000,
-        color: 'blue',
-      },
+      x: 0, y: 50000, z: 0, vx: 0, vy: 0, vz: 0, orbit: false, main: { mass: 1e9, color: 'blue' },
       subsystems: [
-        {
-          x: 1000, y: 0, z: 0, vx: 0, vy: 0, vz: 0,
-          orbit: true,
-          main: {
-            mass: 100000,
-            color: 'orange',
-          },
+        { x: 1000, y: 0, z: 0, vx: 0, vy: 0, vz: 0, orbit: true, main: { mass: 100000, color: 'orange' },
         },
         {
-          x: 30000, y: 0, z: 0, vx: 0, vy: 0, vz: 0,
-          orbit: false,
-          main: {
-            mass: 100,
-            color: 'yellow',
-          },
+          x: 30000, y: 0, z: 0, vx: 0, vy: 0, vz: 0, orbit: false, main: { mass: 100, color: 'yellow' },
           subsystems: [
-            {
-              x: 0, y: 0, z: 6, vx: 0, vy: 0, vz: 0,
-              orbit: true,
-              main: {
-                mass: 1,
-                color: 'green',
-              }
-            },
-            {
-              x: 0, y: 0, z: 10, vx: 0, vy: 0, vz: 0,
-              orbit: true,
-              main: {
-                mass: 1,
-                color: 'red',
-              }
-            },
+            { x: 0, y: 0, z: 6, vx: 0, vy: 0, vz: 0, orbit: true, main: { mass: 1, color: 'green' } },
+            { x: 0, y: 0, z: 10, vx: 0, vy: 0, vz: 0, orbit: true, main: { mass: 1, color: 'red' } },
           ],
         },
         {
-          x: 30030, y: 0, z: 0, vx: 0, vy: 0, vz: 0,
-          orbit: true,
-          main: {
-            mass: 100,
-            color: 'white',
-          },
+          x: 30030, y: 0, z: 0, vx: 0, vy: 0, vz: 0, orbit: true, main: { mass: 100, color: 'white' },
           subsystems: [
-            {
-              x: 0, y: 0, z: 6, vx: 0, vy: 0, vz: 0,
-              orbit: true,
-              main: {
-                mass: 1,
-                color: 'green',
-              }
-            },
-            {
-              x: 0, y: 0, z: 10, vx: 0, vy: 0, vz: 0,
-              orbit: true,
-              main: {
-                mass: 1,
-                color: 'red',
-              }
-            },
+            { x: 0, y: 0, z: 6, vx: 0, vy: 0, vz: 0, orbit: true, main: { mass: 1, color: 'green' } },
+            { x: 0, y: 0, z: 10, vx: 0, vy: 0, vz: 0, orbit: true, main: { mass: 1, color: 'red' } },
           ],
         },
       ],
@@ -359,7 +245,11 @@ SCENARIOS.push((() => {
   
   addSystems(particles, systems, density);
   
-  return particles;
+  return {
+    name: '2 Orbiting Systems Crashing Into Each Other',
+    mode: '3d',
+    particles,
+  };
 })());
 
 SCENARIOS.push((() => {
@@ -403,7 +293,11 @@ SCENARIOS.push((() => {
   
   addSystems(particles, systems, density);
   
-  return particles;
+  return {
+    name: 'Extended Falling System',
+    mode: '3d',
+    particles,
+  };
 })());
 
 SCENARIOS.push((() => {
@@ -460,7 +354,11 @@ SCENARIOS.push((() => {
   
   addSystems(particles, systems, density);
   
-  return particles;
+  return {
+    name: 'Extended Orbiting System',
+    mode: '3d',
+    particles,
+  };
 })());
 
 SCENARIOS.push((() => {
@@ -530,5 +428,9 @@ SCENARIOS.push((() => {
   
   addSystems(particles, systems, density);
   
-  return particles;
+  return {
+    name: 'Extended Orbiting System Duplicated In-Place',
+    mode: '3d',
+    particles,
+  };
 })());
