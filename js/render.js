@@ -35,7 +35,7 @@ function renderText() {
   dist_text.textContent = dist.toExponential(3);
   elev_text.textContent = (elev * 180 / Math.PI).toFixed(2);
   azim_text.textContent = (azim * 180 / Math.PI).toFixed(2);
-  scenario_text.textContent = `#${scenarioNum}: ${scenarioName}`;
+  scenario_text.textContent = `#${scenarioNum}: ${scenarioName} (${mode.toUpperCase()})`;
   running_text.textContent = running;
   time_text.textContent = time.toFixed(2);
   TIME_RATE_text.textContent = timeRate.toExponential(2);

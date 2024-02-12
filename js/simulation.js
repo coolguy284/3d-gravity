@@ -1,5 +1,5 @@
 function resetScenario() {
-  particles = copyScenario(SCENARIOS[scenarioNum]);
+  setScenarioToVar();
 }
 
 function simulate(timeStep) {
