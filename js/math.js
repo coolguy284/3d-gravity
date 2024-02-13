@@ -29,3 +29,7 @@ function transform3DTo2D(x, y, z, dist, elev, azim) {
     return [false];
   }
 }
+
+function transform2DWorldTo2DScreen(x, y, dist, elev, azim) {
+  return transform3DTo2D(x, y, 0, dist, elev, azim);
+}

@@ -2,11 +2,30 @@ function render() {
   ctx.clearRect(-aspect, -1, aspect * 2, 2);
   
   switch (mode) {
-    case '2d':
-      // unimplemented for now
+    case '2d': {
+      let visualParticles = particles.map(([ mass, color, density, x, y, _vx, _vy ]) => {
+        let [ visible, screenX, screenY, objDist ] = transform2DWorldTo2DScreen(x, y, dist, elev, azim);
+        
+        if (visible) {
+          let size = Math.abs(mass / density) ** (1 / 3);
+          let visualSize = size / objDist;
+          
+          return [screenX, screenY, visualSize, color];
+        } else {
+          return null;
+        }
+      }).filter(x => x != null);
+      
+      for (let [ screenX, screenY, visualSize, color ] of visualParticles) {
+        ctx.fillStyle = color;
+        ctx.beginPath();
+        ctx.arc(screenX, screenY, visualSize, 0, Math.PI * 2);
+        ctx.fill();
+      }
       break;
+    }
     
-    case '3d':
+    case '3d': {
       let visualParticles = particles.map(([ mass, color, density, x, y, z, _vx, _vy, _vz ]) => {
         let [ visible, screenX, screenY, objDist ] = transform3DTo2D(x, y, z, dist, elev, azim);
         
@@ -32,6 +51,7 @@ function render() {
         ctx.fill();
       }
       break;
+    }
   }
 }
 
