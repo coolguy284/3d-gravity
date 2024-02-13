@@ -12,9 +12,9 @@ addEventListener('resize', () => setCanvasSize());
     let realTimeStep = (now - pastNow) / 1000;
     let simTimeStep;
     if (fixedTimeStep) {
-      simTimeStep = Math.min(FIXED_TIME_STEP_FACTOR * TIME_RATE_BASE * timeRate, MAX_TIME_STEP);
+      simTimeStep = Math.min(Math.max(FIXED_TIME_STEP_FACTOR * TIME_RATE_BASE * timeRate, -MAX_TIME_STEP), MAX_TIME_STEP);
     } else {
-      simTimeStep = Math.min(realTimeStep * TIME_RATE_BASE * timeRate, MAX_TIME_STEP);
+      simTimeStep = Math.min(Math.max(realTimeStep * TIME_RATE_BASE * timeRate, -MAX_TIME_STEP), MAX_TIME_STEP);
     }
     
     interfaceUpdate(realTimeStep);

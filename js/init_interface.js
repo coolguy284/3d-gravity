@@ -44,13 +44,18 @@ addEventListener('keydown', evt => {
     case 'KeyH':
       timeRateIndex--;
       timeRateIndex = Math.max(timeRateIndex, MIN_TIME_RATE_EXPONENT_INT);
-      timeRate = 10 ** (timeRateIndex * TIME_RATE_EXPONENT_STEP + TIME_RATE_EXPONENT_BASE);
+      timeRate = 10 ** (timeRateIndex * TIME_RATE_EXPONENT_STEP + TIME_RATE_EXPONENT_BASE) * (timeRateBackwards ? -1 : 1);
       break;
     
     case 'KeyJ':
       timeRateIndex++;
       timeRateIndex = Math.min(timeRateIndex, MAX_TIME_RATE_EXPONENT_INT);
-      timeRate = 10 ** (timeRateIndex * TIME_RATE_EXPONENT_STEP + TIME_RATE_EXPONENT_BASE);
+      timeRate = 10 ** (timeRateIndex * TIME_RATE_EXPONENT_STEP + TIME_RATE_EXPONENT_BASE) * (timeRateBackwards ? -1 : 1);
+      break;
+    
+    case 'KeyL':
+      timeRateBackwards = !timeRateBackwards;
+      timeRate = 10 ** (timeRateIndex * TIME_RATE_EXPONENT_STEP + TIME_RATE_EXPONENT_BASE) * (timeRateBackwards ? -1 : 1);
       break;
     
     case 'KeyN':

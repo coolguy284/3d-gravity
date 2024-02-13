@@ -12,11 +12,12 @@ let distExponent = 1.5;
 let dist = 10 ** distExponent;
 let elev = Math.PI / 4;
 let azim = 0;
-let scenarioNum = 9;
-let trackObj = 3;
+let scenarioNum = 8;
+let trackObj = 0;
 let currentlyTracking = true;
 let timeRateIndex = 0;
 let timeRate = 1;
+let timeRateBackwards = false;
 /**
  * 0 = 1x 
  * 1 = 3x
