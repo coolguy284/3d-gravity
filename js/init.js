@@ -2,6 +2,7 @@ addEventListener('resize', () => setCanvasSize());
 
 (async () => {
   setCanvasSize();
+  resetScenario();
   
   let pastNow = Date.now();
   

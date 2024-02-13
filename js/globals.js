@@ -34,6 +34,5 @@ let fixedTimeStep = true;
 let particles;
 let mode;
 let scenarioName;
-let time = 0;
+let time;
 let running = false;
-setScenarioToVar();
