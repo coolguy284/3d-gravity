@@ -8,6 +8,8 @@ function setScenarioToVar() {
   particles = copyParticles(scenario.particles);
   mode = scenario.mode;
   scenarioName = scenario.name;
+  gravStrength = scenario.GRAV_STRENGTH ?? GRAV_STRENGTH;
+  gravDistLowerLimit = scenario.GRAV_DIST_LOWER_LIMIT ?? GRAV_DIST_LOWER_LIMIT;
 }
 
 function addGalaxy(

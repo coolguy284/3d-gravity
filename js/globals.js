@@ -35,5 +35,7 @@ let fixedTimeStep = true;
 let particles;
 let mode;
 let scenarioName;
+let gravStrength;
+let gravDistLowerLimit;
 let time;
 let running = false;

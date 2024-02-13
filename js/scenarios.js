@@ -1,6 +1,8 @@
 SCENARIOS.push({
   name: '2 Particles',
   mode: '2d',
+  GRAV_STRENGTH: 0.01,
+  GRAV_DIST_LOWER_LIMIT: 4e-1,
   particles: [
     // [mass, color, density, x, y, vx, vy]
     [1, 'red', 1e5, -0.3, 0, 0, 1.0],
@@ -20,6 +22,8 @@ SCENARIOS.push((() => {
   return {
     name: 'Tiny Particles in One Place',
     mode: '2d',
+    GRAV_STRENGTH: 0.01,
+    GRAV_DIST_LOWER_LIMIT: 4e-1,
     particles,
   };
 })());
@@ -40,6 +44,8 @@ SCENARIOS.push((() => {
   return {
     name: 'Galaxies With Negative Mass Stars',
     mode: '2d',
+    GRAV_STRENGTH: 0.01,
+    GRAV_DIST_LOWER_LIMIT: 4e-1,
     particles,
   };
 })());
@@ -60,6 +66,8 @@ SCENARIOS.push((() => {
   return {
     name: 'Galaxies With Stars',
     mode: '2d',
+    GRAV_STRENGTH: 0.01,
+    GRAV_DIST_LOWER_LIMIT: 4e-1,
     particles,
   };
 })());
@@ -104,6 +112,8 @@ SCENARIOS.push((() => {
   return {
     name: 'Moving Galaxies With Stars',
     mode: '2d',
+    GRAV_STRENGTH: 0.01,
+    GRAV_DIST_LOWER_LIMIT: 4e-1,
     particles,
   };
 })());

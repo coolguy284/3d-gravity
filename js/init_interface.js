@@ -53,7 +53,7 @@ addEventListener('keydown', evt => {
       timeRate = 10 ** (timeRateIndex * TIME_RATE_EXPONENT_STEP + TIME_RATE_EXPONENT_BASE) * (timeRateBackwards ? -1 : 1);
       break;
     
-    case 'KeyL':
+    case 'KeyK':
       timeRateBackwards = !timeRateBackwards;
       timeRate = 10 ** (timeRateIndex * TIME_RATE_EXPONENT_STEP + TIME_RATE_EXPONENT_BASE) * (timeRateBackwards ? -1 : 1);
       break;
@@ -111,38 +111,38 @@ function interfaceUpdate(timeStep) {
   if (!currentlyTracking) {
     if (currentKeys.has('KeyW')) {
       let angle = azim + Math.PI;
-        
-      centerX += Math.cos(angle) * MOVEMENT_SPEED * timeStep;
-      centerZ += Math.sin(angle) * MOVEMENT_SPEED * timeStep;
+      
+      centerX += Math.cos(angle) * dist * MOVEMENT_SPEED_FACTOR * timeStep;
+      centerZ += Math.sin(angle) * dist * MOVEMENT_SPEED_FACTOR * timeStep;
     }
     
     if (currentKeys.has('KeyS')) {
       let angle = azim;
-        
-      centerX += Math.cos(angle) * MOVEMENT_SPEED * timeStep;
-      centerZ += Math.sin(angle) * MOVEMENT_SPEED * timeStep;
+      
+      centerX += Math.cos(angle) * dist * MOVEMENT_SPEED_FACTOR * timeStep;
+      centerZ += Math.sin(angle) * dist * MOVEMENT_SPEED_FACTOR * timeStep;
     }
     
     if (currentKeys.has('KeyA')) {
       let angle = azim + Math.PI * 1.5;
-        
-      centerX += Math.cos(angle) * MOVEMENT_SPEED * timeStep;
-      centerZ += Math.sin(angle) * MOVEMENT_SPEED * timeStep;
+      
+      centerX += Math.cos(angle) * dist * MOVEMENT_SPEED_FACTOR * timeStep;
+      centerZ += Math.sin(angle) * dist * MOVEMENT_SPEED_FACTOR * timeStep;
     }
     
     if (currentKeys.has('KeyD')) {
       let angle = azim + Math.PI * 0.5;
-        
-      centerX += Math.cos(angle) * MOVEMENT_SPEED * timeStep;
-      centerZ += Math.sin(angle) * MOVEMENT_SPEED * timeStep;
+      
+      centerX += Math.cos(angle) * dist * MOVEMENT_SPEED_FACTOR * timeStep;
+      centerZ += Math.sin(angle) * dist * MOVEMENT_SPEED_FACTOR * timeStep;
     }
     
     if (currentKeys.has('KeyR')) {
-      centerY += MOVEMENT_SPEED * timeStep;
+      centerY += dist * MOVEMENT_SPEED_FACTOR * timeStep;
     }
     
     if (currentKeys.has('KeyF')) {
-      centerY -= MOVEMENT_SPEED * timeStep;
+      centerY -= dist * MOVEMENT_SPEED_FACTOR * timeStep;
     }
   }
 }

@@ -18,12 +18,12 @@ function simulate(timeStep) {
             particle2[4] - particle1[4]
           );
           
-          let forceStrength = GRAV_STRENGTH * particle1[0] * particle2[0];
+          let forceStrength = gravStrength * particle1[0] * particle2[0];
           
           if (dist == 0) {
-            forceStrength /= GRAV_DIST_LOWER_LIMIT * GRAV_DIST_LOWER_LIMIT;
-          } else if (dist < GRAV_DIST_LOWER_LIMIT) {
-            forceStrength /= GRAV_DIST_LOWER_LIMIT * GRAV_DIST_LOWER_LIMIT;
+            forceStrength /= gravDistLowerLimit * gravDistLowerLimit;
+          } else if (dist < gravDistLowerLimit) {
+            forceStrength /= gravDistLowerLimit * gravDistLowerLimit;
           } else {
             forceStrength /= dist * dist;
           }
@@ -78,12 +78,12 @@ function simulate(timeStep) {
             particle2[5] - particle1[5]
           );
           
-          let forceStrength = GRAV_STRENGTH * particle1[0] * particle2[0];
+          let forceStrength = gravStrength * particle1[0] * particle2[0];
           
           if (dist == 0) {
-            forceStrength /= GRAV_DIST_LOWER_LIMIT * GRAV_DIST_LOWER_LIMIT;
-          } else if (dist < GRAV_DIST_LOWER_LIMIT) {
-            forceStrength /= GRAV_DIST_LOWER_LIMIT * GRAV_DIST_LOWER_LIMIT;
+            forceStrength /= gravDistLowerLimit * gravDistLowerLimit;
+          } else if (dist < gravDistLowerLimit) {
+            forceStrength /= gravDistLowerLimit * gravDistLowerLimit;
           } else {
             forceStrength /= dist * dist;
           }
