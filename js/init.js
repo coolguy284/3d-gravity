@@ -26,11 +26,25 @@ addEventListener('resize', () => setCanvasSize());
     if (currentlyTracking) {
       // set center vars to position of object
       try {
-        let [ _1, _2, _3, x, y, z, _4, _5, _6 ] = particles[trackObj];
-        
-        centerX = x;
-        centerY = y;
-        centerZ = z;
+        switch (mode) {
+          case '2d': {
+            let [ _1, _2, _3, x, y, _4, _5 ] = particles[trackObj];
+            
+            centerX = x;
+            centerY = 0;
+            centerZ = y;
+            break;
+          }
+          
+          case '3d': {
+            let [ _1, _2, _3, x, y, z, _4, _5, _6 ] = particles[trackObj];
+            
+            centerX = x;
+            centerY = y;
+            centerZ = z;
+            break;
+          }
+        }
       } catch {}
     }
     render();

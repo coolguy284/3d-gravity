@@ -1,3 +1,3 @@
+low prio:
 render ellipses not circles, its better perspective
   maybe leave circles mode as a performance efficient rendering mode
-implement 2d mode
