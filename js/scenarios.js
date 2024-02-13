@@ -1,4 +1,114 @@
 SCENARIOS.push({
+  name: '2 Particles',
+  mode: '2d',
+  particles: [
+    // [mass, color, density, x, y, vx, vy]
+    [1, 'red', 1e5, -0.3, 0, 0, 1.0],
+    [1, 'blue', 1e5, 0.3, 0, 0, -1.0],
+  ],
+});
+
+SCENARIOS.push((() => {
+  let particles = [];
+  
+  particles.push([100, 'blue', 1e5, 0, 0, 0, 0]);
+  
+  for (let i = 0; i < 1000; i++) {
+    particles.push([0.03, 'yellow', 1e5, 1, 0, 0, 0]);
+  }
+  
+  return {
+    name: 'Tiny Particles in One Place',
+    mode: '2d',
+    particles,
+  };
+})());
+
+SCENARIOS.push((() => {
+  let particles = [];
+  
+  particles.push([30, 'blue', 1e5, 1, 0, 0, 0]);
+      
+  particles.push([30, 'green', 1e5, -1, 0, 0, 0]);
+  
+  for (let i = 0; i < 500; i++) {
+    particles.push([-0.06, 'yellow', 1e5, 1, 0, 0, 0]);
+    
+    particles.push([-0.055, 'red', 1e5, -1, 0, 0, 0]);
+  }
+  
+  return {
+    name: 'Galaxies With Negative Mass Stars',
+    mode: '2d',
+    particles,
+  };
+})());
+
+SCENARIOS.push((() => {
+  let particles = [];
+  
+  particles.push([30, 'blue', 1e5, 1, 0, 0, 0]);
+      
+  particles.push([100, 'green', 1e5, -1, 0, 0, 0]);
+  
+  for (let i = 0; i < 500; i++) {
+    particles.push([0.06, 'yellow', 1e5, 1, 0, 0, 0]);
+    
+    particles.push([0.055, 'red', 1e5, -1, 0, 0, 0]);
+  }
+  
+  return {
+    name: 'Galaxies With Stars',
+    mode: '2d',
+    particles,
+  };
+})());
+
+SCENARIOS.push((() => {
+  let particles = [];
+  
+  particles.push([30, 'blue', 1e5, 1, 0, 0.4, 0]);
+  
+  particles.push([100, 'green', 1e5, -1, 0, -0.4, 0]);
+  
+  let copies = 500;
+  
+  for (let i = 0; i < copies; i++) {
+    let angle = 2 * Math.PI * rng();
+    let dist = 0.5 * rng();
+    
+    let angle2 = angle + Math.PI / 2;
+    let speed = 1 / dist ** 0.5 * 0.007;
+    
+    particles.push([
+      0.06,
+      'yellow',
+      1e5,
+      1 + Math.cos(angle) * dist,
+      0 + Math.sin(angle) * dist,
+      0.4 + Math.cos(angle2) * speed * (30 + 0.06 * copies),
+      0 + Math.sin(angle2) * speed * (30 + 0.06 * copies),
+    ]);
+    
+    particles.push([
+      0.055,
+      'red',
+      1e5,
+      -1 + Math.cos(angle) * dist,
+      0 + Math.sin(angle) * dist,
+      -0.4 + Math.cos(angle2) * speed * (100 + 0.055 * copies),
+      0 + Math.sin(angle2) * speed * (100 + 0.055 * copies),
+    ]);
+  }
+  
+  return {
+    name: 'Moving Galaxies With Stars',
+    mode: '2d',
+    particles,
+  };
+})());
+
+SCENARIOS.push({
   name: 'Debug 3-Axes',
   mode: '3d',
   particles: [
