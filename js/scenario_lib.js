@@ -38,7 +38,7 @@ function addGalaxy(
   particles.push([bigMass, bigColor, density, centerX, centerY, centerZ, centerVX, centerVY, centerVZ]);
   
   for (let i = 0; i < littleCount; i++) {
-    let random = normals();
+    let random = normals_nonzero();
     let x = random[0] * littleDistSpan;
     let z = random[1] * littleDistSpan;
     let dist = Math.hypot(x, z);
@@ -56,7 +56,7 @@ function addGalaxy(
     let vx = Math.cos(tangentAng) * speed;
     let vz = Math.sin(tangentAng) * speed;
     
-    let y = (rng() - 0.5) * littleDistThick;
+    let y = (rng_0to1() - 0.5) * littleDistThick;
     
     particles.push([littleIndividMass, littleColor, density, x + centerX, y + centerY, z + centerZ, vx + centerVX, centerVY, vz +  + centerVZ]);
   }

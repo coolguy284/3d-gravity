@@ -32,12 +32,27 @@ function uint32_gen_to_01(func) {
 }
 
 let _xmur = xmur3(SEED);
-let rng = uint32_gen_to_01(sfc32_lightweight_uint32(_xmur(), _xmur(), _xmur(), _xmur()));
+let rng_u32 = sfc32_lightweight_uint32(_xmur(), _xmur(), _xmur(), _xmur());
+let rng_0to1 = uint32_gen_to_01(rng_u32);
 
 function normals() {
   // https://en.wikipedia.org/wiki/Box%E2%80%93Muller_transform
   
-  let u1 = rng(), u2 = rng();
+  let u1 = rng_0to1(), u2 = rng_0to1();
+  
+  let factor = Math.sqrt(-2 * Math.log(u1));
+  let angle = 2 * Math.PI * u2;
+  
+  let z0 = factor * Math.cos(angle);
+  let z1 = factor * Math.sin(angle);
+  
+  return [z0, z1];
+}
+
+function normals_nonzero() {
+  // https://en.wikipedia.org/wiki/Box%E2%80%93Muller_transform
+  
+  let u1 = (rng_u32() + 1) / (2 ** 32 + 1), u2 = rng_0to1();
   
   let factor = Math.sqrt(-2 * Math.log(u1));
   let angle = 2 * Math.PI * u2;

@@ -31,7 +31,7 @@ function simulate(timeStep) {
           let forceNormX, forceNormY;
           
           if (dist == 0) {
-            let angle = 2 * Math.PI * rng();
+            let angle = 2 * Math.PI * rng_0to1();
             
             forceNormX = Math.cos(angle);
             forceNormY = Math.sin(angle);
@@ -92,8 +92,8 @@ function simulate(timeStep) {
           
           if (dist == 0) {
             // pick random direction to apply force in
-            let [ norm1, norm2 ] = normals();
-            let [ norm3, _ ] = normals();
+            let [ norm1, norm2 ] = normals_nonzero();
+            let [ norm3, _ ] = normals_nonzero();
             
             forceNormX = norm1;
             forceNormY = norm2;

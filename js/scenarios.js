@@ -82,8 +82,8 @@ SCENARIOS.push((() => {
   let copies = 500;
   
   for (let i = 0; i < copies; i++) {
-    let angle = 2 * Math.PI * rng();
-    let dist = 0.5 * rng();
+    let angle = 2 * Math.PI * rng_0to1();
+    let dist = 0.5 * rng_0to1();
     
     let angle2 = angle + Math.PI / 2;
     let speed = 1 / dist ** 0.5 * 0.007;
